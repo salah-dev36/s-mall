@@ -17,7 +17,7 @@
       transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
     }
 
-    & .category-body-item {
+    & .category-body-container {
       opacity: 0.77;
     }
   }
@@ -28,7 +28,7 @@
       transition: transform 2s cubic-bezier(0.25, 0.45, 0.45, 0.95)
     }
 
-    & .category-body-item {
+    & .category-body-container {
       opacity: 0.65;
     }
   }
