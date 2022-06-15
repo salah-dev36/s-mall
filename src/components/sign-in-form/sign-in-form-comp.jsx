@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
-import Button from '../../components/button/button-comp';
-import {createUserDocument, signInWithGooglePopup, signInAuthUser}from '../../utils/firebase/firebase-utils';
+
 import FormInput from '../form-input/form-input-comp';
+import Button from '../../components/button/button-comp';
+
+
+import {createUserDocument, signInWithGooglePopup, signInAuthUser}from '../../utils/firebase/firebase-utils';
+
 import './sign-in-form-styles.scss'
+
+const defaultFieldsValue = {
+  email: '',
+  password: ''
+}
 
 const SignInForm = () => {
 
-  const defaultFieldsValue = {
-    email: '',
-    password: ''
-  }
-
   const [formFields, setFormFields] = useState(defaultFieldsValue);
   const {email, password} = formFields;
+
 
   const resetFormFields = () => {
     setFormFields(defaultFieldsValue);
@@ -22,10 +27,10 @@ const SignInForm = () => {
     event.preventDefault();
 
     try { 
-      const response = await signInAuthUser(email, password);
-      console.log(response)
-
+      const {user} = await signInAuthUser(email, password);
+      
       resetFormFields();
+      
     } catch (err) {
         switch(err.code) {
           case 'auth/user-not-found' :
@@ -43,8 +48,8 @@ const SignInForm = () => {
 
 
   const logGoogleUser = async () => {
-    const {user} = await signInWithGooglePopup();
-    await createUserDocument(user);
+    await signInWithGooglePopup();
+
   };
 
   const eventHandler = (event) => {

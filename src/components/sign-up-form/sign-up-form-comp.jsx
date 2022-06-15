@@ -1,8 +1,12 @@
-import'./sign-up-form-styles.scss'
 import React, { useState } from 'react'
-import { createAuthUser, createUserDocument } from '../../utils/firebase/firebase-utils';
+
 import FormInput from '../form-input/form-input-comp';
 import Button from '../button/button-comp';
+
+
+import { createAuthUser, createUserDocument } from '../../utils/firebase/firebase-utils';
+
+import'./sign-up-form-styles.scss'
 
 
 const  defaultFieldsValue = {
@@ -32,7 +36,9 @@ const SignUpForm = () => {
       const { user } = await createAuthUser(email, password);
 
       await createUserDocument(user, { displayName });
+      
       resetFormFields();
+      
     } catch (err) {
       if(err.code === 'auth/email-already-in-use') {
         alert('This email is already associated with another account') 
