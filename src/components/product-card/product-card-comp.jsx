@@ -20,7 +20,10 @@ const ProductCard = ({product}) => {
       
       <div className="footer">
         <span className="name">{name}</span>
-        <span className="price">{price}</span>
+        { price < 99 ? 
+          <span className="price">${price}</span> :
+          <span className="high-price">${price}</span>
+        }
       </div>
 
       <Button onClick={addToCart} children='Add to Cart' feature='inverted'/>
