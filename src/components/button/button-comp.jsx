@@ -1,10 +1,12 @@
-import React from 'react'
-import './button-styles.scss'
+import React from "react";
+import "./button-styles.scss";
 
-const Button = ({children, feature, ...buttonProps}) => {
+const Button = ({ children, feature, ...buttonProps }) => {
   return (
-    <button {...buttonProps} className={`button-container ${feature}`} >{children}</button>
-  )
-}
+    <button {...buttonProps} className={`button-container ${feature}`}>
+      {children}
+    </button>
+  );
+};
 
-export default Button
+export default Button;

@@ -1,52 +1,47 @@
-import React, { Fragment, useContext } from 'react';
-import {Link, Outlet} from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Link, Outlet } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import { UserContext } from '../../contexts/user-context';
-import { CartContext } from '../../contexts/cart-context';
+import { ReactComponent as ShopLogo } from "../../assets/crown.svg";
+import "./navigation-styles.scss";
 
-import { ReactComponent as ShopLogo } from '../../assets/crown.svg';
+import { SignOutUser } from "../../utils/firebase/firebase-utils";
 
-import { SignOutUser } from '../../utils/firebase/firebase-utils';
-
-import './navigation-styles.scss';
-import CartIcon from '../../components/cart-icon/cart-icon-comp';
-import CartDisplay from '../../components/cart-display/cart-display-comp';
-
+import CartIcon from "../../components/cart-icon/cart-icon-comp";
+import CartDisplay from "../../components/cart-display/cart-display-comp";
+import { selectCurrentUser } from "../../store/user/user-selector";
+import { selectCartState } from "../../store/cart/cart-selector";
 
 const Navigation = () => {
-
-  const {currentUser}= useContext(UserContext);
-  const {cartState} = useContext(CartContext);
-  
+  const currentUser = useSelector(selectCurrentUser);
+  const cartState = useSelector(selectCartState);
 
   return (
     <Fragment>
       <div className="navigation">
-        <Link to='/' className='logo-container'>
+        <Link to="/" className="logo-container">
           <ShopLogo className="logo" />
         </Link>
         <div className="links-container">
-          <Link to='/shop' className="link">
+          <Link to="/shop" className="link">
             Shop
-          </Link>  
-          {
-            currentUser ? (
-              <span onClick={SignOutUser} className="link" >Sing Out</span>
-            ) : (
-              <Link to='/sign-in' className="link">
-                Sign In
-              </Link> 
-            )
-          } 
-          <CartIcon />       
+          </Link>
+          {currentUser ? (
+            <span onClick={SignOutUser} className="link">
+              Sing Out
+            </span>
+          ) : (
+            <Link to="/sign-in" className="link">
+              Sign In
+            </Link>
+          )}
+          <CartIcon />
         </div>
-        {
-          cartState && <CartDisplay />   
-        }
+        {cartState && <CartDisplay />}
       </div>
       <Outlet />
     </Fragment>
-  )
-}
+  );
+};
 
-export default Navigation
+export default Navigation;

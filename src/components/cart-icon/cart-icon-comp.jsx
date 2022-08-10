@@ -1,28 +1,31 @@
-import { ReactComponent as CartImg } from '../../assets/cart.svg'
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { CartContext } from '../../contexts/cart-context'
+import { ReactComponent as CartImg } from "../../assets/cart.svg";
+import "./cart-icon-styles.scss";
 
-import './cart-icon-styles.scss'
-
-import React, { useContext } from 'react'
-
-
+import {
+  selectCartState,
+  selectItemsCount,
+} from "../../store/cart/cart-selector";
+import { setCartState } from "../../store/cart/cart-action";
 
 const CartIcon = () => {
-  const {cartState, setCartState,itemsNumber} = useContext(CartContext);
+  const dispatch = useDispatch();
 
-
+  const cartState = useSelector(selectCartState);
+  const itemsNumber = useSelector(selectItemsCount);
 
   const toggleCart = () => {
-    setCartState(!cartState)
-  }
+    dispatch(setCartState(!cartState));
+  };
 
   return (
-    <div className='cart-icon-container' onClick={toggleCart}>
-      <CartImg className='cart-img'/>
-      <span className='item-count'>{itemsNumber}</span>
+    <div className="cart-icon-container" onClick={toggleCart}>
+      <CartImg className="cart-img" />
+      <span className="item-count">{itemsNumber}</span>
     </div>
-  )
-}
+  );
+};
 
-export default CartIcon
+export default CartIcon;
