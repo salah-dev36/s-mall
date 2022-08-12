@@ -9,6 +9,7 @@ import {
   selectCartItems,
   selectTotalCount,
 } from "../../store/cart/cart-selector";
+import BillingForm from "../../components/billing-form/billing-form-comp";
 
 const CheckOut = () => {
   const cartItems = useSelector(selectCartItems);
@@ -37,6 +38,11 @@ const CheckOut = () => {
         return <CheckOutItem cartItem={cartItem} key={cartItem.id} />;
       })}
       <span className="total">Total: ${cartTotal}</span>
+      <h3>
+        * Please use the following test debit card for payment * 4242 4242 4242
+        4242 - Exp: 04/24 - CVV:242 - Postcode: 42424
+      </h3>
+      <BillingForm />
     </div>
   );
 };

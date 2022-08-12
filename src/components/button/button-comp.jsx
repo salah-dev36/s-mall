@@ -1,10 +1,10 @@
 import React from "react";
 import "./button-styles.scss";
 
-const Button = ({ children, feature, ...buttonProps }) => {
+const Button = ({ children, feature, isLoading, ...buttonProps }) => {
   return (
     <button {...buttonProps} className={`button-container ${feature}`}>
-      {children}
+      {isLoading ? <div className="spinner" /> : children}
     </button>
   );
 };
