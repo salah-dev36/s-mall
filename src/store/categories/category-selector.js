@@ -16,3 +16,8 @@ export const categoriesSelector = createSelector(
       return accumulator;
     }, {})
 );
+
+export const loadingStateSelector = createSelector(
+  [selectCategoryReducer],
+  (categoriesPart) => categoriesPart.loading
+);
