@@ -1,13 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { useDispatch } from "react-redux";
-
 import { Routes, Route } from "react-router-dom";
 
-import Navigation from "./routes/navigation/navigation-comp";
-import Homeage from "./routes/homepage/homepage-comp";
-import Authentication from "./routes/sign-in/authentication-page-comp";
-import Shop from "./routes/shop/shop-comp";
-import CheckOut from "./routes/check-out/check-out-comp";
+import Spinner from "./components/spinner/spinner-comp";
 
 import {
   AuthChangeListener,
@@ -15,31 +10,39 @@ import {
 } from "./utils/firebase/firebase-utils";
 import { setCurrentUser } from "./store/user/user-action";
 
+const Navigation = lazy(() => import("./routes/navigation/navigation-comp"));
+const Homepage = lazy(() => import("./routes/homepage/homepage-comp"));
+const Authentication = lazy(() =>
+  import("./routes/sign-in/authentication-page-comp")
+);
+const Shop = lazy(() => import("./routes/shop/shop-comp"));
+const CheckOut = lazy(() => import("./routes/check-out/check-out-comp"));
+
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubcribe = AuthChangeListener((user) => {
-      
       if (user) {
         createUserDocument(user);
       }
       dispatch(setCurrentUser(user));
-      
     });
 
     return unsubcribe;
-  }, [dispatch]);
+  }, []);
 
   return (
-    <Routes>
-      <Route path="/" element={<Navigation />}>
-        <Route index element={<Homeage />} />
-        <Route path="sign-in" element={<Authentication />} />
-        <Route path="shop/*" element={<Shop />} />
-        <Route path="checkout" element={<CheckOut />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={<Spinner />}>
+      <Routes>
+        <Route path="/" element={<Navigation />}>
+          <Route index element={<Homepage />} />
+          <Route path="sign-in" element={<Authentication />} />
+          <Route path="shop/*" element={<Shop />} />
+          <Route path="checkout" element={<CheckOut />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 };
 

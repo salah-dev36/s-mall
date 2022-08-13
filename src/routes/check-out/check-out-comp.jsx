@@ -1,17 +1,17 @@
-import React from "react";
+import React, { memo } from "react";
 import { useSelector } from "react-redux";
 
 import "./check-out-styles.scss";
 
 import CheckOutItem from "../../components/checkout-item/checkout-item-comp";
+import BillingForm from "../../components/billing-form/billing-form-comp";
 
 import {
   selectCartItems,
   selectTotalCount,
 } from "../../store/cart/cart-selector";
-import BillingForm from "../../components/billing-form/billing-form-comp";
 
-const CheckOut = () => {
+const CheckOut = memo(() => {
   const cartItems = useSelector(selectCartItems);
   const cartTotal = useSelector(selectTotalCount);
 
@@ -45,6 +45,6 @@ const CheckOut = () => {
       <BillingForm />
     </div>
   );
-};
+});
 
 export default CheckOut;

@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import { startFetchingCategories } from "../../store/categories/category-action";
 
 import CategoriesPreview from "../categories-preview/categories-preview-comp";
+
 import Category from "../category/category-comp";
 import "./shop-styles.scss";
 
@@ -13,7 +14,7 @@ const Shop = () => {
 
   useEffect(() => {
     dispatch(startFetchingCategories());
-  }, [dispatch]);
+  }, []);
 
   return (
     <Routes>

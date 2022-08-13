@@ -5,8 +5,19 @@
   align-items: center;
   justify-content: center;
 
+  
+
   .form-container{
     height: 100px;
-    min-width: 600px;
+    min-width: 480px;
+    
+    @media screen and (max-width: 800px) {
+      padding: 25px;
+
+      button {
+        margin-top:35px ;
+      }
+    }
+
   }
 }

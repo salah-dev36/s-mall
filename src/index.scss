@@ -3,7 +3,11 @@ body {
   font-family: 'Open Sans';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: 10px 30px 30px ;
+  padding: 0px 30px 30px ;
+
+  @media screen and (max-width: 800px) {
+    padding: 10px;
+  }
 }
 
 code {

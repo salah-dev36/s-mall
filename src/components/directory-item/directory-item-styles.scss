@@ -9,6 +9,8 @@
   margin: 0 7.5px 15px;
   overflow: hidden;
 
+  
+
   &:hover {
     cursor: pointer;
 
@@ -35,6 +37,11 @@
 
   &.large {
     height: 380px;
+
+    @media screen and (max-width: 600px) {
+      height: 200px;
+      
+    }
   }
 
   &:first-child {
@@ -69,11 +76,24 @@
       margin: 0 6px 0;
       font-size: 22px;
       color: #4a4a4a;
+
+      @media screen and (max-width: 800px) {
+        font-size: 16px;
+      }
     }
 
     p {
       font-weight: lighter;
       font-size: 16px;
+
+      @media screen and (max-width: 800px) {
+        font-size: 12px;
+      }
     }
+  }
+
+  @media screen and (max-width: 600px) {
+    height: 200px;
+    
   }
 }

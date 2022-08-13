@@ -9,6 +9,7 @@ import { SignOutUser } from "../../utils/firebase/firebase-utils";
 
 import CartIcon from "../../components/cart-icon/cart-icon-comp";
 import CartDisplay from "../../components/cart-display/cart-display-comp";
+
 import { selectCurrentUser } from "../../store/user/user-selector";
 import { selectCartState } from "../../store/cart/cart-selector";
 

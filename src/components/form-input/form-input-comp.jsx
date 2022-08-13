@@ -1,10 +1,9 @@
 import React from "react";
-import './form-input-styles.scss'
+import "./form-input-styles.scss";
 
-const FormInput = ({ label, inputProps}) => {
+const FormInput = ({ label, inputProps }) => {
   return (
     <div className="form-block">
-      
       <input className="form-input" {...inputProps} />
 
       {label && (
@@ -16,7 +15,6 @@ const FormInput = ({ label, inputProps}) => {
           {label}
         </label>
       )}
-
     </div>
   );
 };

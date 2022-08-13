@@ -5,11 +5,21 @@
   justify-content: space-between;
   margin-bottom: 25px;
 
+@media  screen and (max-width: 800px) {
+    height: 60px;
+    padding: 10px;
+    margin-bottom: 35px;
+}
+
   .logo-container {
     height: 100%;
     width: 70px;
     padding: 25px;
     
+    @media  screen and (max-width: 800px) {
+      width: 50px;
+      
+    }
   }
 
   .links-container {
@@ -20,9 +30,18 @@
     align-items: center;
     justify-content: flex-end;
 
+    @media  screen and (max-width: 800px) {
+      width: 70%;
+      margin-top: 28px;
+      justify-content: space-around;
+      font-size: 18px;
+      font-weight: bold ;
+      
+    }
+
     .link {
       padding: 10px 15px;
-      cursor: pointer;
+      cursor: pointer; 
     }
   }
 }

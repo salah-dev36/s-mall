@@ -1,15 +1,13 @@
-import React from 'react'
-import Directory from '../../components/directory/directory-comp'
+import React from "react";
 
+import Directory from "../../components/directory/directory-comp";
 
-const Homeage = () => {
-  
+const Homepage = () => {
   return (
     <div className="homepage">
-      <Directory/>
+      <Directory />
     </div>
-    
-  )
-}
+  );
+};
 
-export default Homeage
+export default Homepage;

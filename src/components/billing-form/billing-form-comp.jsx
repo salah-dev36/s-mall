@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 import Button from "../button/button-comp";
 
 import "./billing-form-styles.scss";
-import { useSelector } from "react-redux";
+
 import { selectTotalCount } from "../../store/cart/cart-selector";
 import { selectCurrentUser } from "../../store/user/user-selector";
-import { useState } from "react";
+
 
 const BillingForm = () => {
   const stripe = useStripe();

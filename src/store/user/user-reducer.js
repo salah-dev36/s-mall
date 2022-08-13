@@ -1,4 +1,4 @@
-import  USER_ACTION_TYPES  from "./user-types";
+import USER_ACTION_TYPES from "./user-types";
 
 const USER_INITIAL_STATE = {
   currentUser: null,
@@ -17,4 +17,3 @@ export const userReducer = (state = USER_INITIAL_STATE, action = {}) => {
       return state;
   }
 };
-
