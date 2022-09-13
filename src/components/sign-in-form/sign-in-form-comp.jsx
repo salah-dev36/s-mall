@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import FormInput from "../form-input/form-input-comp";
 import Button from "../../components/button/button-comp";
 
-import {
-  createUserDocument,
-  signInWithGooglePopup,
-  signInAuthUser,
-} from "../../utils/firebase/firebase-utils";
-
 import "./sign-in-form-styles.scss";
+import { useDispatch } from "react-redux";
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../store/user/user-action";
 
 const defaultFieldsValue = {
   email: "",
@@ -19,20 +18,20 @@ const defaultFieldsValue = {
 
 const SignInForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [formFields, setFormFields] = useState(defaultFieldsValue);
   const { email, password } = formFields;
 
   const resetFormFields = () => {
     setFormFields(defaultFieldsValue);
-    navigate("/shop");
   };
 
   const submitHandler = async (event) => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUser(email, password);
+      dispatch(emailSignInStart(email, password));
 
       resetFormFields();
     } catch (err) {
@@ -52,8 +51,7 @@ const SignInForm = () => {
   };
 
   const logGoogleUser = async () => {
-    await signInWithGooglePopup();
-    navigate("/shop");
+    dispatch(googleSignInStart());
   };
 
   const eventHandler = (event) => {

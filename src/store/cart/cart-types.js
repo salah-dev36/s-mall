@@ -1,6 +1,0 @@
-const CART_ACTION_TYPES = {
-  SET_CART_ITEMS: "cart/SET_CART_ITEMS",
-  SET_CART_STATE: "cart/SET_CART_STATE",
-};
-
-export default CART_ACTION_TYPES;

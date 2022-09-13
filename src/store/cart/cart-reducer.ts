@@ -1,11 +1,18 @@
-import CART_ACTION_TYPES from "./cart-types";
+import { CART_ACTION_TYPES, Product } from "./cart-types";
 
-const CART_INITIAL_STATE = {
+import { CartActions } from "./cart-action";
+
+export type CartState = {
+  readonly cartState: boolean;
+  readonly cartItems: Product[]
+}
+
+const CART_INITIAL_STATE: CartState = {
   cartState: false,
   cartItems: [],
 };
 
-export const cartReducer = (state = CART_INITIAL_STATE, action) => {
+export const cartReducer = (state = CART_INITIAL_STATE, action = {} as CartActions) : CartState => {
   const { type, payload } = action;
 
   switch (type) {

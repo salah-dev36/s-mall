@@ -4,11 +4,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Spinner from "./components/spinner/spinner-comp";
 
-import {
-  AuthChangeListener,
-  createUserDocument,
-} from "./utils/firebase/firebase-utils";
-import { setCurrentUser } from "./store/user/user-action";
+import { checkUserSession } from "./store/user/user-action";
 
 const Navigation = lazy(() => import("./routes/navigation/navigation-comp"));
 const Homepage = lazy(() => import("./routes/homepage/homepage-comp"));
@@ -22,14 +18,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubcribe = AuthChangeListener((user) => {
-      if (user) {
-        createUserDocument(user);
-      }
-      dispatch(setCurrentUser(user));
-    });
-
-    return unsubcribe;
+    dispatch(checkUserSession())
   }, []);
 
   return (
