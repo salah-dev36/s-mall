@@ -11,6 +11,7 @@ import { Elements } from "@stripe/react-stripe-js";
 
 import { store, persistor } from "./store/store";
 import { stripePromise } from "./stripe/stripe";
+import * as registerServiceWorker from "./serviceWorkerRegistration"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -27,6 +28,7 @@ root.render(
   </React.StrictMode>
 );
 
+registerServiceWorker.register()
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
