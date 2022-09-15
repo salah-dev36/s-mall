@@ -4,8 +4,15 @@ import DirectoryItem from "../directory-item/directory-item-comp";
 
 import "./directory-styles.scss";
 
+export type DirectoryItemType = {
+  id: number;
+  title: string;
+  imageUrl: string;
+  size?: string
+}
+
 const Directory = () => {
-  const categories = [
+  const categories: DirectoryItemType[] = [
     {
       id: 1,
       title: "hats",

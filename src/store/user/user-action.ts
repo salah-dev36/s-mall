@@ -1,4 +1,5 @@
 import { USER_ACTION_TYPES } from "./user-types";
+import { User } from 'firebase/auth'
 
 import { UserData, OtherInformation } from "../../utils/firebase/firebase-utils";
 import { Action, ActionWithPayload } from "../../utils/reducer/reducer-utils";
@@ -29,7 +30,7 @@ export type SignInFailure = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_FAILURE,
 
 export type SignUpStart = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_START, {email: string, password: string, displayName: string}>
 
-export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_SUCESS, {user: UserData, otherInformation: OtherInformation}>
+export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_SUCESS, {user: User, otherInformation: OtherInformation}>
 
 export type SignUpFailure = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_FAILURE, Error>
 
@@ -39,7 +40,7 @@ export type SignOutSuccess = Action<USER_ACTION_TYPES.SIGN_OUT_SUCESS>;
 
 export type SignOutFailure = ActionWithPayload<USER_ACTION_TYPES.SIGN_OUT_FAILURE, Error>;
 
-export type UserAcions =  SignInSuccess | SignInFailure |   SignUpFailure | SignOutSuccess | SignOutFailure
+export type UserAcions =  SignInSuccess | SignInFailure | SignUpFailure | SignOutSuccess | SignOutFailure
 
 export const checkUserSession = (): CheckUserSession => ({
   type: USER_ACTION_TYPES.CHECK_USER_SESSION,
@@ -62,7 +63,7 @@ export const googleSignInStart = (): GoogleSignInStart => ({
   type: USER_ACTION_TYPES.GOOGLE_SIGN_IN_START,
 });
 
-export const signInSuccess = (user: UserData): SignInSuccess => ({
+export const signInSuccess = (user: UserData & {id: string}): SignInSuccess => ({
   type: USER_ACTION_TYPES.SIGN_IN_SUCCESS,
   payload: user,
 });
@@ -77,7 +78,7 @@ export const signUpStart = (email: string, password: string, displayName:string)
   payload: { email, password, displayName },
 });
 
-export const signUpSuccess = ( user: UserData, otherInformation: OtherInformation ): SignUpSuccess => ({
+export const signUpSuccess = ( user: User, otherInformation: OtherInformation ): SignUpSuccess => ({
   type: USER_ACTION_TYPES.SIGN_UP_SUCESS,
   payload: { user, otherInformation },
 });

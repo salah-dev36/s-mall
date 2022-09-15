@@ -23,7 +23,7 @@ export const fetchingCategoriesSuccess = (categoriesArray: Category[]): Fetching
   payload: categoriesArray,
 });
 
-export const fetchingCategoriesFailure = (error: Error) => ({
+export const fetchingCategoriesFailure = (error: Error): FetchingCategoriesFailure => ({
   type: CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_FAILED,
   payload: error,
 });

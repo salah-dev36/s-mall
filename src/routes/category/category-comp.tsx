@@ -12,11 +12,15 @@ import {
 
 import "./category-styles.scss";
 
+export type CategoryRouteParams = {
+  category: string
+}
+
 const Category = () => {
-  const { category } = useParams();
+  const { category } = useParams<keyof CategoryRouteParams>() as CategoryRouteParams;
   const categoriesMap = useSelector(categoriesSelector);
   const loading = useSelector(loadingStateSelector);
-  const [products, SetProducts] = useState([]);
+  const [products, SetProducts] = useState(categoriesMap[category]);
 
   useEffect(() => {
     SetProducts(categoriesMap[category]);

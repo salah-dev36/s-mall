@@ -1,8 +1,13 @@
-import React, { memo } from "react";
+import React, { FC, memo } from "react";
+import { Product } from "../../store/cart/cart-types";
 
 import "./cart-item-styles.scss";
 
-const CartItem = memo(({ cartItem }) => {
+export type CartItemProps = {
+  cartItem: Product
+}
+
+const CartItem: FC<CartItemProps> = memo(({ cartItem }) => {
   const { name, quantity, imageUrl, price } = cartItem;
   return (
     <div className="cart-item-container">

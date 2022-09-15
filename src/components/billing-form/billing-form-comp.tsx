@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
@@ -17,7 +17,7 @@ const BillingForm = () => {
   const currentUser = useSelector(selectCurrentUser);
   const [paymentProcessing, setPaymentProcessing] = useState(false);
 
-  const paymentHandler = async (event) => {
+  const paymentHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!stripe || !elements) {
@@ -34,9 +34,13 @@ const BillingForm = () => {
 
     const clientSecret = response.paymentIntent.client_secret;
 
+    const cardDetails = elements.getElement(CardElement)
+
+    if (!cardDetails) return;
+
     const paymentResult = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
-        card: elements.getElement(CardElement),
+        card: cardDetails,
         billing_details: {
           name: currentUser ? currentUser.displayName : "Guest",
         },
@@ -58,7 +62,7 @@ const BillingForm = () => {
     <div className="billing-form-container">
       <form onSubmit={paymentHandler} className="form-container">
         <h2>Credit Card Payment</h2>
-        <CardElement required />
+        <CardElement  />
         <Button
           disabled={!amount || paymentProcessing}
           isLoading={paymentProcessing}

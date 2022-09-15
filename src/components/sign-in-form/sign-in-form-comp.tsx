@@ -1,15 +1,18 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+
+
 
 import FormInput from "../form-input/form-input-comp";
-import Button from "../../components/button/button-comp";
+import Button from "../button/button-comp";
 
 import "./sign-in-form-styles.scss";
-import { useDispatch } from "react-redux";
+
 import {
   googleSignInStart,
   emailSignInStart,
 } from "../../store/user/user-action";
+
 
 const defaultFieldsValue = {
   email: "",
@@ -17,44 +20,32 @@ const defaultFieldsValue = {
 };
 
 const SignInForm = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [formFields, setFormFields] = useState(defaultFieldsValue);
   const { email, password } = formFields;
 
+
+
   const resetFormFields = () => {
     setFormFields(defaultFieldsValue);
   };
 
-  const submitHandler = async (event) => {
+  
+
+  const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    try {
-      dispatch(emailSignInStart(email, password));
+    dispatch(emailSignInStart(email, password));
 
-      resetFormFields();
-    } catch (err) {
-      switch (err.code) {
-        case "auth/user-not-found":
-          alert(
-            "There was a problem, we cannot find an account with that email address"
-          );
-          break;
-        case "auth/wrong-password":
-          alert("Incorrect username/password combination. Please try again");
-          break;
-        default:
-          console.log(err);
-      }
-    }
+    resetFormFields();
   };
 
   const logGoogleUser = async () => {
     dispatch(googleSignInStart());
   };
 
-  const eventHandler = (event) => {
+  const eventHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
     setFormFields({ ...formFields, [name]: value });

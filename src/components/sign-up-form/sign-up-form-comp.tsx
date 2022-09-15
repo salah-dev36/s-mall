@@ -1,15 +1,11 @@
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import FormInput from "../form-input/form-input-comp";
 import Button from "../button/button-comp";
 
-import {
-  createAuthUser,
-  createUserDocument,
-} from "../../utils/firebase/firebase-utils";
-
 import "./sign-up-form-styles.scss";
+
 import { signUpStart } from "../../store/user/user-action";
 
 const defaultFieldsValue = {
@@ -28,28 +24,19 @@ const SignUpForm = () => {
     setFormFields(defaultFieldsValue);
   };
 
-  const submitHandler = async (event) => {
+  const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
       alert("passwords do not correspond");
       return;
     }
-
-    try {
       dispatch(signUpStart(email,password, displayName))
 
       resetFormFields();
-    } catch (err) {
-      if (err.code === "auth/email-already-in-use") {
-        alert("This email is already associated with another account");
-      } else {
-        console.log("there was an issue", err);
-      }
-    }
   };
 
-  const eventHandler = (event) => {
+  const eventHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
     setFormFields({ ...formFields, [name]: value });
